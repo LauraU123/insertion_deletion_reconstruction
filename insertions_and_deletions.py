@@ -1,11 +1,6 @@
 from Bio import Phylo, SeqIO
-from itertools import groupby, count
-from string import digits
-import collections
 import pandas as pd
-import re, os, json
-from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
+import json
 from collections import defaultdict
 import argparse
 
