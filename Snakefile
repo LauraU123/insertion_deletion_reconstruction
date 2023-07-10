@@ -1,6 +1,6 @@
 #this workflow reconstructs the mutations in the RSV A and RSV B duplicated regions of the G gene
 
-A_OR_B = ["a"]
+A_OR_B = ["a", "b"]
 
 rule all:
     input:
