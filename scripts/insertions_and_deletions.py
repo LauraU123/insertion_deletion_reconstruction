@@ -40,8 +40,6 @@ def deletion_recursive(node, list_=None, dictionary_=None):
     return(dictionary_)
 
 
-
-
 def reconstruct_insertions(insertionfile, tree):
 
     """ This function reconstructs insertions along a newick tree file, provided an insertion CSV file for terminal nodes"""
@@ -77,6 +75,7 @@ if __name__ == '__main__':
     parser.add_argument("--json", required=True, help="json file")
     parser.add_argument("--output", help="tsv output file")
     parser.add_argument("--insertions", help="insertions_file")
+    parser.add_argument("--alignedgene", help="gene translation annotated file")
     parser.add_argument("--tree", help="tree nwk file")
     args = parser.parse_args()
 
@@ -102,7 +101,9 @@ if __name__ == '__main__':
             for i in deletions:
                 if '-' in i:
                     location = int(i[1:-1])
-                    if location in G_gene: deletions_dict[branch].append(i)
+                    if location in G_gene: 
+                        print(i)
+                        deletions_dict[branch].append(i)
 
     # Finding deletions and insertion locations and lengths
     ins_length, del_length = (dict() for i in range(2))
@@ -121,4 +122,12 @@ if __name__ == '__main__':
     df.index =['deletion length', 'insertion length', 'deletion locations', 'insertion locations']
     df = df.T 
     df =df.reset_index()
-    df.to_csv(args.output, sep='\t')
+
+    #keeping only mutations relevant to G protein structure
+    relevant_ids = []
+    aligned_gene_sequences = SeqIO.parse(args.alignedgene, "fasta")
+    for entry in aligned_gene_sequences:
+        if 'X' in entry.seq: relevant_ids.append(entry.id)
+    relevant_indels = df.loc[df['index'].isin(relevant_ids)]
+    relevant_indels.to_csv(args.output, sep="\t")
+    #df.to_csv(args.output, sep='\t')
