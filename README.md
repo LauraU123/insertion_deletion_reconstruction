@@ -4,6 +4,7 @@
 This function reconstructs insertions on each branch in RSV phylogenetic trees, 
 compares them to deletions and outputs a CSV file comparing insertions and deletions.
 
+
 ### Input Data
 
 The function inputs include:
@@ -15,6 +16,8 @@ The function inputs include:
  * tree (nwk format)
  
  * insertion file (csv format)
+ 
+ * aligned G amino acid file (fasta)
 
 ### Output Data
 
@@ -35,6 +38,9 @@ This function can be run from the command line as:
 	--reference {annotated genome reference gbk format} \
 
 	--insertions {insertions file CSV format} \
+	
+	--alignedgene {aligned G amino acid file} \
 
 	--output {output file TSV format}
 ```
+

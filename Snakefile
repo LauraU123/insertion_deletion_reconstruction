@@ -26,18 +26,6 @@ rule insertions_deletions:
         --alignedgene {input.G_aligned}
         """
 
-#rule compare:
-#    input:
-#        G_aligned = "data/{a_or_b}/alignedG.fasta",
-#        indels = rules.insertions_deletions.output
-#    output:
-#        "results/{a_or_b}_indel_with_effect.tsv"
-#    shell:
-#        """
-#        python3 scripts/compare.py \
-#        --alignedgene {input.G_aligned} \
-#        --indels {input.indels} \
-#        --output {output}
-#        """
+
 
     
